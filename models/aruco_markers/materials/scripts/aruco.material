@@ -1,0 +1,27 @@
+material Aruco101
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture aruco_101.png
+      }
+    }
+  }
+}
+
+material Aruco102
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture aruco_102.png
+      }
+    }
+  }
+}

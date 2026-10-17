@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="erc_drone_world">
+    
+    <!-- Işık ve Zemin -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- 3 Metre Yarıçaplı Yarışma Alanı (Zemindeki Daire) -->
+    <model name="competition_area">
+      <static>true</static>
+      <pose>0 0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>3.0</radius>
+              <length>0.002</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <!-- Kahverengimsi toprak rengi -->
+            <ambient>0.5 0.4 0.3 1</ambient>
+            <diffuse>0.5 0.4 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 10x10x4 Kafes Duvarları -->
+    <!-- Ön Duvar -->
+    <model name="cage_front">
+      <static>true</static>
+      <pose>0 5 2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>10 0.1 4</size></box></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+          <transparency>0.7</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>10 0.1 4</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <!-- Arka Duvar -->
+    <model name="cage_back">
+      <static>true</static>
+      <pose>0 -5 2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>10 0.1 4</size></box></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+          <transparency>0.7</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>10 0.1 4</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <!-- Sol Duvar -->
+    <model name="cage_left">
+      <static>true</static>
+      <pose>-5 0 2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.1 10 4</size></box></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+          <transparency>0.7</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.1 10 4</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <!-- Sağ Duvar -->
+    <model name="cage_right">
+      <static>true</static>
+      <pose>5 0 2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.1 10 4</size></box></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+          <transparency>0.7</transparency>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.1 10 4</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Merkezdeki 1x1 Kalkış Noktası ve ArUco 101 -->
+    <model name="liftoff_spot">
+      <static>true</static>
+      <pose>0 0 0.002 0 0 0</pose>
+      <link name="link">
+        <!-- Beyaz zemin (1x1 m) -->
+        <visual name="base_visual">
+          <geometry><box><size>1 1 0.001</size></box></geometry>
+          <material>
+            <ambient>0.9 0.9 0.9 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        
+        <!-- ArUco 101 İşaretçisi (15x15 cm) -->
+        <visual name="aruco_visual">
+          <pose>0 0 0.001 0 0 0</pose> <!-- Beyaz zeminden 1 mm yukarıda -->
+          <geometry><box><size>0.15 0.15 0.001</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>Aruco101</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Sabit Konumlu 3 Adet Prob (3 Metre İçinde Rastgele Dağıtılmış) -->
+    <model name="probe_1">
+      <static>true</static>
+      <pose>1.5 1.5 0.015 0 1.5708 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><cylinder><radius>0.015</radius><length>0.24</length></cylinder></geometry>
+          <material><ambient>0.6 1.0 0.2 1</ambient><diffuse>0.6 1.0 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="probe_2">
+      <static>true</static>
+      <pose>-2.0 1.0 0.015 0 1.5708 0.5</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><cylinder><radius>0.015</radius><length>0.24</length></cylinder></geometry>
+          <material><ambient>0.6 1.0 0.2 1</ambient><diffuse>0.6 1.0 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="probe_3">
+      <static>true</static>
+      <pose>0.5 -2.5 0.015 0 1.5708 -0.5</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><cylinder><radius>0.015</radius><length>0.24</length></cylinder></geometry>
+          <material><ambient>0.6 1.0 0.2 1</ambient><diffuse>0.6 1.0 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="landing_target">
+    <static>true</static>
+    <link name="link">
+      <!-- Alt Kısım: Turuncu Zemin (0.5m yarıçap) -->
+      <visual name="base_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.5</radius>
+            <length>0.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>1.0 0.6 0.0 1</ambient>
+          <diffuse>1.0 0.6 0.0 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Üst Kısım: ArUco 102 İşaretçisi (15x15 cm) -->
+      <visual name="aruco_visual">
+        <!-- Turuncu diskin 2 milimetre üstüne koyuyoruz ki birbirine girmesinler -->
+        <pose>0 0 0.002 0 0 0</pose>
+        <geometry>
+          <box><size>0.15 0.15 0.001</size></box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://aruco_markers/materials/scripts</uri>
+            <uri>model://aruco_markers/materials/textures</uri>
+            <name>Aruco102</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
